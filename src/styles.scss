@@ -19,3 +19,162 @@
 .experience .certificate-dialog{box-sizing:border-box;width:min(760px,calc(100vw - 40px));max-height:85dvh;padding:16px}.experience .certificate-dialog .work-video-heading h2{font:500 18px/1.3 Arial,sans-serif;margin:0;letter-spacing:0}.experience .certificate-dialog .work-video-heading p{font-size:12px;margin:5px 0 0}.experience .certificate-dialog .work-video-heading{margin:0 0 12px}.experience .certificate-dialog img{width:100%;height:auto;max-height:calc(85dvh - 100px);object-fit:contain;background:transparent}@media(max-width:600px){.experience .certificate-dialog{width:calc(100vw - 24px);padding:12px}.experience .certificate-dialog .work-video-heading h2{font-size:16px}}
 
 .experience .work-video-dialog{box-sizing:border-box;width:min(620px,calc(100vw - 32px),85dvh);height:min(620px,calc(100vw - 32px),85dvh);max-height:85dvh;padding:16px;overflow:hidden}.experience .work-video-dialog .work-video-heading{height:36px;margin:0 0 12px}.experience .work-video-dialog .work-video-heading h2{font:500 18px/1.3 Arial,sans-serif;margin:0;letter-spacing:0}.experience .work-video-dialog video{width:100%;height:calc(100% - 48px);object-fit:contain;background:#020611}.experience .work-video-dialog .work-video-heading button{flex-shrink:0}@media(max-width:600px){.experience .work-video-dialog{padding:12px}.experience .work-video-dialog .work-video-heading h2{font-size:16px}}
+
+html,body{height:auto;overflow-x:hidden;overflow-y:auto;scroll-behavior:auto}
+.experience{position:relative;overflow:clip;min-height:100vh}
+.experience canvas,.experience .vignette{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+.experience header{position:fixed;background:linear-gradient(#030712e8,transparent)}
+.experience .chapter-rail,.experience>footer{position:fixed}
+.experience .chapter-tag{position:fixed;top:110px;z-index:4}
+.story{position:relative;z-index:3}
+.story-chapter{position:relative;min-height:100svh;padding:155px 0 32vh;display:flow-root}
+.experience .story-chapter .content,.experience .story-chapter .intro,.experience .story-chapter .content.collection{position:relative;top:auto;bottom:auto;left:auto;margin-left:7%;width:min(850px,55vw);padding:16px 24px 24px 0;overflow:visible;max-height:none;animation:none;transform:none!important;opacity:1!important;visibility:visible!important;background:linear-gradient(90deg,#030712ed,#030712aa 80%,transparent);will-change:auto}
+.experience .story-chapter .intro,.experience .story-chapter .about,.experience .story-chapter .work,.experience .story-chapter .contact{width:min(550px,44vw)}
+.experience .story-chapter .intro{margin-top:10vh}
+.experience .menu-backdrop{position:fixed}.experience .chapter-menu{position:fixed}
+@media(max-width:900px){
+.experience .vignette{background:linear-gradient(0deg,#030712 0%,#030712d9 45%,transparent 70%)}
+.experience .chapter-tag{top:85px;left:6%;font-size:11px}
+.experience .chapter-rail{top:120px;right:2%;gap:12px}
+.story-chapter{padding:48svh 0 24svh;min-height:100svh}
+.experience .story-chapter .content,.experience .story-chapter .intro,.experience .story-chapter .content.collection,.experience .story-chapter .about,.experience .story-chapter .work,.experience .story-chapter .contact{width:88%;margin-left:6%;padding:18px 0 28px;background:linear-gradient(#030712cc,#030712f5);border-top:1px solid #719de530}
+.experience .story-chapter .intro{margin-top:0}
+.experience .story-chapter h2,.experience .story-chapter .intro h1{font-size:clamp(32px,6vw,45px);letter-spacing:-1.3px}
+.experience .story-chapter .content p{font-size:14px;line-height:1.8}
+.experience .technology-grid{grid-template-columns:repeat(3,1fr)}
+.experience .role-grid,.experience .credential-grid{grid-template-columns:1fr 1fr}
+.experience>footer{background:linear-gradient(transparent,#030712 45%);bottom:0;left:0;right:0;padding:40px 6% 18px;pointer-events:none}
+.experience>footer button{pointer-events:auto}.experience .journey{bottom:45px}
+}
+@media(max-width:500px){.experience .technology-grid,.experience .credential-grid,.experience .role-grid{grid-template-columns:1fr 1fr}.experience .role-card{padding:13px}.experience .role-card h3{font-size:14px}.experience .role-card p{font-size:11px}.experience .cert-header>span{font-size:8px}.experience .technology{padding:10px;min-height:58px}.experience .technology strong{font-size:12px}}
+html .experience.experience{position:relative;overflow:clip;min-height:100vh}
+.experience.experience canvas,.experience.experience .vignette{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+.experience.experience header,.experience.experience .chapter-rail,.experience.experience>footer,.experience.experience .chapter-tag{position:fixed}
+.experience.experience .chapter-tag{top:110px}
+@media(max-width:900px){.experience.experience .chapter-tag{top:85px}}
+
+.spatial-layer{position:fixed;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+.experience .spatial-layer .scene-panel{position:absolute!important;top:0!important;left:0!important;bottom:auto!important;margin:0!important;padding:24px!important;max-height:none!important;overflow:visible!important;background:#071326f5!important;border:1px solid #5e9ef080;border-radius:12px;box-shadow:0 0 32px #286ce92e;transform-origin:center!important;will-change:transform}
+.scene-panel::before{content:attr(data-scene-title);display:block;margin:-24px -24px 22px;padding:13px 20px;background:#143158;border-bottom:1px solid #649fe640;color:#adcefa;font:11px monospace;letter-spacing:2px;text-transform:uppercase;border-radius:12px 12px 0 0}
+.experience .spatial-layer h2{font-size:clamp(30px,3vw,44px);margin:12px 0 20px}
+.experience .spatial-layer .intro h1{font-size:clamp(34px,4vw,58px)}
+.experience .spatial-layer .technology-grid{grid-template-columns:repeat(3,1fr)}
+.experience .spatial-layer .credential-grid{grid-template-columns:1fr 1fr}
+.story-chapter{padding:0!important;min-height:260svh}
+.experience.experience header{z-index:20}.experience.experience .chapter-rail{z-index:21}.experience.experience>footer{z-index:21}.experience.experience .chapter-tag{z-index:21}
+@media(max-width:900px){.experience .spatial-layer .scene-panel{padding:18px!important}.scene-panel::before{margin:-18px -18px 18px;padding:12px 16px}.experience .spatial-layer h2{font-size:31px}.experience .spatial-layer .technology-grid{grid-template-columns:1fr 1fr}.experience .spatial-layer .role-grid{grid-template-columns:1fr}.experience .spatial-layer .content p{font-size:14px}.experience .spatial-layer .scene-panel{border-color:#71acff80}}
+
+/* Content is the monitor display; the bezel and screen travel together. */
+.experience .spatial-layer .scene-panel{padding:0!important;overflow:hidden!important;border:10px solid #182c48!important;border-radius:8px;background:#071326!important;box-shadow:0 0 0 2px #5986bb,0 12px 45px #0008!important}
+.scene-panel::before{display:none!important}
+.monitor-content{padding:32px 48px;will-change:transform;min-height:100%}
+.experience .monitor-content .content,.experience .monitor-content .intro,.experience .monitor-content .content.collection{position:relative!important;inset:auto!important;width:100%!important;max-width:1100px;margin:0 auto!important;padding:0!important;background:none!important;animation:none!important;overflow:visible!important;max-height:none!important}
+.experience .spatial-layer .technology-grid{grid-template-columns:repeat(4,1fr)}
+.experience .spatial-layer .credential-grid{grid-template-columns:repeat(3,1fr)}
+.experience .spatial-layer .intro{padding-top:5vh!important}
+.experience.experience .chapter-tag{display:none}
+@media(max-width:900px){.experience .spatial-layer .scene-panel{padding:0!important;border-width:7px!important}.monitor-content{padding:24px 20px}.experience .spatial-layer .technology-grid,.experience .spatial-layer .credential-grid{grid-template-columns:1fr 1fr}.experience .spatial-layer .role-grid{grid-template-columns:1fr}}
+
+.monitor-preview{position:absolute;inset:0;display:grid;place-items:center;color:#aad2ff;font:600 clamp(28px,5vw,64px) monospace;letter-spacing:-1px;background:radial-gradient(ellipse,#102c58,#071326 75%);pointer-events:none}
+
+.experience .spatial-layer .scene-panel{border:0!important;border-radius:1px!important;box-shadow:none!important;background:#071326!important}
+
+.story{pointer-events:none}
+
+.spatial-layer{isolation:isolate;transform:translateZ(0);pointer-events:auto}.spatial-layer>div,.spatial-layer>div>div{pointer-events:auto!important}
+
+.experience .spatial-layer .scene-panel{border:12px solid #253957!important;border-bottom-width:28px!important;border-radius:9px!important;box-shadow:inset 0 0 0 2px #030815!important}
+.scene-panel::after{content:'jouhara  •';position:absolute;bottom:-24px;left:0;right:0;text-align:center;color:#a8bee0;font:10px monospace;letter-spacing:3px}
+@media(max-width:900px){.experience .spatial-layer .scene-panel{border-width:7px!important;border-bottom-width:20px!important}.scene-panel::after{bottom:-17px;font-size:8px}}
+
+.experience .spatial-layer .intro{padding-top:0!important}.experience .spatial-layer .intro h1{font-size:clamp(32px,3.4vw,48px);margin:16px 0 20px}.monitor-content{padding:24px 36px}@media(max-width:900px){.monitor-content{padding:18px 16px}.experience .spatial-layer .intro h1{font-size:32px}}
+
+/* A fixed display aspect ratio, with hardware visible during the reading hold. */
+.experience .spatial-layer .technology-grid{grid-template-columns:repeat(3,1fr)}
+.experience .spatial-layer .credential-grid{grid-template-columns:1fr 1fr}
+.experience .spatial-layer h2{font-size:clamp(28px,3vw,40px)}
+.monitor-content{padding:24px 30px}.experience .spatial-layer .content p{line-height:1.75}
+@media(max-width:900px){.monitor-content{padding:18px 16px}.experience .spatial-layer .technology-grid{grid-template-columns:1fr 1fr}.experience .spatial-layer h2{font-size:29px}}
+
+.experience .monitor-content .about p{margin:14px 0;font-size:14px;line-height:1.7}.experience .monitor-content .watch-work{margin-top:14px;padding:10px 16px}
+
+.experience .spatial-layer .scene-panel{transform-origin:0 0!important}
+
+/* Startup belongs to the physical display, with an accessible control outside it. */
+.boot-screen{min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#030710;color:#e4efff}
+.boot-logo{font-size:clamp(42px,6vw,72px);font-weight:700;letter-spacing:-5px;text-shadow:0 0 24px #438fff44}
+.boot-screen p{font-size:12px!important;letter-spacing:1px;color:#8cabc9}
+.boot-power,.boot-controls button{border:1px solid #45658c;border-radius:8px;background:#102646;color:#dceaff;padding:12px 20px;cursor:pointer}
+.boot-power{margin-top:24px}.boot-hidden{display:none}
+.boot-controls{position:fixed;bottom:8vh;left:50%;transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:16px}
+.boot-controls .boot-skip{border:0;background:transparent;color:#95abc9}
+.is-booting header,.is-booting .chapter-rail,.is-booting footer{visibility:hidden}
+.boot-loader{display:flex;gap:7px;margin-top:24px}.boot-loader span{height:5px;width:5px;background:#6cafff;border-radius:50%;animation:boot-pulse .8s ease-in-out infinite alternate}.boot-loader span:nth-child(2){animation-delay:.15s}.boot-loader span:nth-child(3){animation-delay:.3s}
+@keyframes boot-pulse{from{opacity:.2}to{opacity:1}}
+@media(max-width:900px){.boot-screen{min-height:350px}.boot-logo{font-size:48px;letter-spacing:-3px}.boot-controls{bottom:6vh;white-space:nowrap}}
+@media(prefers-reduced-motion:reduce){.boot-loader span{animation:none}}
+
+.boot-windows-logo{display:block;width:112px;height:112px;object-fit:contain;filter:drop-shadow(0 0 22px #67afff44)}
+
+/* Fill the display itself during startup rather than placing a card inside it. */
+.is-booting .scene-panel:has(.boot-screen){background:#030710!important}
+.is-booting .scene-panel:has(.boot-screen) .monitor-content{position:absolute;inset:0;padding:0!important;height:100%;transform:none!important}
+.is-booting .scene-panel:has(.boot-screen) .intro{height:100%;max-width:none!important}
+.is-booting .boot-screen{position:absolute;inset:0;min-height:0;background:transparent}
+
+.boot-start-action{display:flex;flex-direction:column;align-items:center;gap:10px}
+.experience .boot-controls .boot-main-power{display:flex;align-items:center;gap:12px;padding:16px 32px;background:#2466db;color:#fff;border:1px solid #86b9ff;border-radius:12px;font-size:18px;font-weight:600;box-shadow:0 0 28px #448aff66;transition:background .2s,box-shadow .2s}
+.boot-main-power span{font-size:25px}.boot-start-action small{color:#bacbe3;font-size:12px;letter-spacing:.4px}
+.experience .boot-controls .boot-main-power:hover,.experience .boot-controls .boot-main-power:focus-visible{background:#347be8;box-shadow:0 0 36px #448aff99;outline:2px solid #c9e0ff;outline-offset:4px}
+.boot-controls{gap:24px;bottom:5vh;align-items:flex-start}.boot-controls .boot-skip{margin-top:12px}
+@media(max-width:900px){.boot-controls{bottom:5vh;gap:14px}.experience .boot-controls .boot-main-power{padding:14px 24px;font-size:17px}}
+
+/* A luminous desktop wallpaper fills the physical startup display. */
+.is-booting .scene-panel:has(.boot-screen){background:radial-gradient(ellipse at 61% 43%,#2883c7 0%,#125b98 30%,#063866 64%,#031b38 100%)!important}
+.is-booting .boot-screen{overflow:hidden;background:radial-gradient(ellipse at 50% 52%,#8cd7ff22,transparent 58%),linear-gradient(135deg,#3b9bc318,transparent 60%)}
+.is-booting .boot-screen::before{content:'';position:absolute;width:130%;height:75%;left:-20%;bottom:-48%;border:2px solid #73d9ff44;border-radius:50%;transform:rotate(-20deg);box-shadow:0 -18px 40px #7ae6ff12,0 -2px 12px #9aefff25;pointer-events:none}
+.is-booting .boot-screen::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,#c4eeff0d,transparent 45%),radial-gradient(ellipse at center,transparent 50%,#00112655);pointer-events:none}
+.boot-windows-logo{position:relative;z-index:1;filter:drop-shadow(0 0 20px #9cdfff55)}
+.boot-screen p{position:relative;z-index:1;color:#d6ecff!important;text-shadow:0 1px 3px #002041}
+.boot-loader{position:relative;z-index:1}
+
+/* Every display keeps its wallpaper and glass lighting while content is read. */
+.experience:not(.is-booting) .spatial-layer .scene-panel{
+  background:
+    radial-gradient(ellipse at 110% 140%,transparent 55%,#76c8ff20 55.3%,transparent 55.8%),
+    linear-gradient(120deg,#a1d9ff0b,transparent 42%),
+    radial-gradient(ellipse at 80% 38%,#164d79 0%,#0c2c4b 40%,#07172c 80%)!important;
+  box-shadow:inset 0 0 0 2px #030815,inset 0 0 36px #020a2280!important;
+}
+.experience:not(.is-booting) .monitor-content{position:relative;z-index:1;text-shadow:0 1px 2px #020b24aa}
+.experience:not(.is-booting) .scene-panel p{color:#d5e3f2}
+.experience:not(.is-booting) .scene-panel .eyebrow{color:#94caff}
+
+/* User-provided Windows desktop sits inside every monitor. */
+.experience:not(.is-booting) .spatial-layer .scene-panel{
+  background:linear-gradient(90deg,#031329df 0%,#031329b8 55%,#03132970 100%),url('../public/media/windows-desktop.png') center/100% 100% no-repeat!important;
+}
+
+/* A tactile power switch replaces the large call-to-action rectangle. */
+.experience .boot-controls .boot-main-power{width:64px;height:64px;padding:0;border-radius:50%;justify-content:center;background:radial-gradient(circle at 35% 25%,#273a55,#0a1323 75%);border:1px solid #648ab8;box-shadow:inset 0 2px 3px #b5d6ff25,inset 0 -3px 5px #0009,0 0 18px #459bff28;color:#b9deff}
+.boot-main-power svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;filter:drop-shadow(0 0 4px #56b4ff)}
+.boot-start-action{gap:8px}.boot-start-action strong{font-size:14px;font-weight:500;letter-spacing:.5px;color:#d8e8fa}.boot-start-action small{font-size:11px;color:#8399b6}
+.experience .boot-controls .boot-main-power:hover,.experience .boot-controls .boot-main-power:focus-visible{background:radial-gradient(circle at 35% 25%,#375476,#101e33 75%);box-shadow:inset 0 2px 3px #b5d6ff33,0 0 25px #459bff55}
+.boot-controls{left:50%;bottom:3vh;gap:0}.boot-controls .boot-skip{position:absolute;left:calc(100% + 22px);top:20px;margin:0;white-space:nowrap;font-size:12px}
+@media(max-width:900px){.boot-controls{bottom:4vh}.experience .boot-controls .boot-main-power{width:60px;height:60px;padding:0}.boot-controls .boot-skip{left:calc(100% + 8px)}}
+
+/* The WebGL monitor supplies the bezel; the HTML surface is only its screen. */
+.experience .spatial-layer .scene-panel{border:0!important;border-radius:2px!important;box-shadow:inset 0 0 20px #020a2233!important}
+
+.shutdown-button{margin-top:18px;padding:11px 18px;color:#dceaff;background:#0b1c32;border:1px solid #779bc166;border-radius:8px;cursor:pointer}.shutdown-button:hover{background:#183453}.shutdown-button span{margin-right:8px}
+.shutdown-screen{position:fixed;inset:0;z-index:100;background:#020408;display:grid;place-items:center;animation:shutdown-fade .8s ease both;text-align:center}.shutdown-screen>div{animation:shutdown-fade .8s .8s ease both}.shutdown-screen p{color:#879bb4;font-size:15px}.shutdown-screen button{margin-top:16px;padding:14px 24px;border-radius:30px;border:1px solid #5e83ad;background:#101b2c;color:#d6eaff;cursor:pointer}
+@keyframes shutdown-fade{from{opacity:0}to{opacity:1}}@media(prefers-reduced-motion:reduce){.shutdown-screen,.shutdown-screen>div{animation:none}}
+.experience .monitor-content .contact p{margin:12px 0;font-size:14px;line-height:1.6}.experience .monitor-content .contact-links{margin-top:14px}.experience .monitor-content .contact-links a{padding:12px 0}.experience .monitor-content .shutdown-button{margin-top:12px;padding:10px 18px}
+
+/* Certificate preview remains on the same physical monitor surface. */
+.experience .scene-panel .certificate-dialog{position:absolute;inset:0;z-index:10;margin:0;width:100%;height:100%;max-height:none;border:0;border-radius:0;padding:16px;background:#081a30f5;box-shadow:none;overflow:hidden}
+.experience .scene-panel .certificate-dialog[open]{display:flex;flex-direction:column}
+.experience .scene-panel .certificate-dialog .work-video-heading{flex-shrink:0;margin-bottom:12px}
+.experience .scene-panel .certificate-dialog .work-video-heading h2{font-size:16px}
+.experience .scene-panel .certificate-dialog img{flex:1;min-height:0;width:100%;height:0;max-height:none;object-fit:contain}
+@media(max-width:900px){.experience .scene-panel .certificate-dialog{padding:12px}.experience .scene-panel .certificate-dialog .work-video-heading h2{font-size:14px}}

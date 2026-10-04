@@ -1,6 +1,17 @@
-<main class="experience" aria-label="Jouhara’s interactive portfolio">
+<main [class.is-booting]="booting()" class="experience" aria-label="Jouhara’s interactive portfolio">
   <canvas #canvas aria-hidden="true"></canvas>
+  @if(shutDown()){
+    <div class="shutdown-screen" role="dialog" aria-modal="true" aria-label="Portfolio shut down">
+      <div><p>Thanks for visiting.</p><button (click)="restart()">⏻ Power on again</button></div>
+    </div>
+  }
   <div class="vignette"></div>
+  @if(booting()){
+    <div class="boot-controls">
+      @if(!bootStarted()){<div class="boot-start-action"><button class="boot-main-power" (click)="startBoot()" aria-label="Power on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v9M6.3 6.3a8 8 0 1 0 11.4 0"/></svg></button><strong>Power on</strong><small>Click to start · sound on</small></div>}
+      <button class="boot-skip" (click)="finishBoot()">Skip intro →</button>
+    </div>
+  }
   <header>
     <button class="brand" (click)="go(0)" aria-label="Jouhara — go to introduction">jouhara</button>
     <button class="menu-toggle" (click)="menuOpen.update(toggleMenu)" [attr.aria-expanded]="menuOpen()" aria-controls="chapter-menu" aria-label="Open navigation">{{ menuOpen() ? '×' : '☰' }}</button>
@@ -10,22 +21,35 @@
     <nav id="chapter-menu" class="chapter-menu" aria-label="Chapters">
       <div class="menu-heading">EXPLORE MY WORLD<button (click)="menuOpen.set(false)" aria-label="Close navigation">×</button></div>
       @for(label of chapters; track $index){
-        <button class="menu-chapter" [class.active]="chapter() === $index" (click)="go($index)"><span class="menu-icon">{{['⌂','◎','⌘','▣','◇','↗','✉'][$index]}}</span><span>{{label}}</span><small>0{{$index+1}}</small></button>
+        <button class="menu-chapter" [class.active]="chapter() === $index" (click)="go($index)"><span class="menu-icon">{{['⌂','◎','⌘','▣','◇','↗','✉','⏻'][$index]}}</span><span>{{label}}</span><small>0{{$index+1}}</small></button>
       }
     </nav>
   }
-  <div class="chapter-tag"><span class="status-dot"></span> {{ chapters[chapter()] }} <span class="tag-number">0{{ chapter() + 1 }} / 07</span></div>
-  @switch (chapter()) {
-  @case (0) {
+  <div class="chapter-tag"><span class="status-dot"></span> {{ chapters[chapter()] }} <span class="tag-number">0{{ chapter() + 1 }} / 08</span></div>
+  <div class="story">
+    <div class="story-chapter" data-chapter="0">
     <section class="intro" aria-label="Introduction">
+      @if(booting()){
+        <div class="boot-screen" [class.boot-started]="bootStarted()" aria-live="polite">
+          <img class="boot-windows-logo" src="media/windows-startup.svg" alt="Windows">
+          @if(bootStarted()){
+            <div class="boot-loader" aria-hidden="true"><span></span><span></span><span></span></div>
+            <p>Starting Windows</p>
+          }@else{
+            <p>Welcome to my workspace.</p>
+          }
+        </div>
+      }
+      <div class="intro-copy" [class.boot-hidden]="booting()">
       <div class="eyebrow">FULL STACK SOFTWARE DEVELOPER</div>
       <h1>Thoughtful code.<br><span>Real possibilities.</span></h1>
       <p>I turn complex ideas into<br>thoughtful digital experiences.</p>
       <button class="explore" (click)="go(1)">Explore my work <span>↗</span></button>
+      </div>
     </section>
 
-  }
-  @case (1) {
+    </div>
+    <div class="story-chapter" data-chapter="1">
     <section class="content about" aria-label="About me" tabindex="0">
       <div class="about-copy"><div class="eyebrow">01 / THE PERSON BEHIND THE CODE</div><h2>Curiosity is<br>my source code<span>.</span></h2>
       <p>I’m Jouhara NK, a full stack developer in Bengaluru. I turn ideas into web experiences—from the interface people see to the systems behind it.</p>
@@ -33,15 +57,15 @@
       <div class="pills"><span>Bengaluru, India</span><span>Full stack development</span></div>
       <button class="watch-work" (click)="openWorkVideo()">Watch me at work <span aria-hidden="true">▶</span></button></div>
     </section>
-  }
-  @case (2) {
+    </div>
+    <div class="story-chapter" data-chapter="2">
     <section class="content collection skills" aria-label="Skills" tabindex="0">
       <div class="eyebrow">02 / MY TOOLKIT</div><h2>A toolkit for<br>bringing ideas to life<span>.</span></h2>
       <div class="technology-grid">@for(tech of technologies; track tech[0]){<div class="technology"><span class="tech-icon" [style.color]="tech[2]">{{tech[1]}}</span><strong>{{tech[0]}}</strong></div>}</div>
       <div class="credential-note">✓ JavaScript — passed LinkedIn Skill Assessment</div>
     </section>
-  }
-  @case (3) {
+    </div>
+    <div class="story-chapter" data-chapter="3">
     <section class="content collection career" aria-label="Experience" tabindex="0">
       <div class="eyebrow">03 / EXPERIENCE</div><h2>Experience that<br>shapes how I build<span>.</span></h2>
       <div class="role-grid">
@@ -53,33 +77,41 @@
         <article class="role-card recognition"><div class="role-top"><span class="role-icon">✧</span><small>RECOGNITION</small></div><h3>Hulk Award</h3><p>KnoDTec Solutions Private Limited</p><time>August 2025</time></article>
       </div>
     </section>
-  }
-  @case (4) {
+    </div>
+    <div class="story-chapter" data-chapter="4">
     <section class="content collection learning" aria-label="Education and certifications" tabindex="0">
       <div class="eyebrow">04 / EDUCATION & CERTIFICATIONS</div><h2>Learning never<br>stands still<span>.</span></h2>
       <article class="degree-card"><span class="degree-icon">◇</span><div><h3>B.Tech. in Information Technology</h3><p>Cochin University of Science and Technology</p><time>2013 — 2017</time></div></article>
       <div class="cert-header"><h3>Certifications</h3><span>09 CREDENTIALS</span></div>
       <div class="credential-grid">@for(cert of certifications; track cert[1]){<button class="certificate-card" (click)="openCertificate(cert)" [attr.aria-label]="'View ' + cert[1] + ' certificate'" aria-haspopup="dialog"><span class="certificate-icon">{{cert[0]}}</span><div><strong>{{cert[1]}}</strong><span>{{cert[2]}}</span><small class="certificate-view">View certificate ↗</small></div></button>}</div>
     </section>
-  }
-  @case (5) {
+    </div>
+    <div class="story-chapter" data-chapter="5">
     <section class="content work" aria-label="Selected work" tabindex="0"><div class="eyebrow">05 / SELECTED WORK</div><h2>Built. Hosted.<br>Out in the world<span>.</span></h2>
       <a class="featured-project" href="https://www.dchr.in" target="_blank" rel="noopener noreferrer"><div class="project-browser"><i></i><i></i><i></i><span>www.dchr.in</span></div><div class="project-art"><span>DCHR<span class="project-dot">.</span></span><small>LIVE ON THE WEB</small></div><div class="project-caption"><div><small>HOSTED WEBSITE</small><strong>dchr.in</strong></div><span>↗</span></div></a>
       <a class="profile-link" href="https://jouhara.github.io" target="_blank" rel="noopener noreferrer">Visit my personal website <span>↗</span></a>
     </section>
-  }
-  @case (6) {
-    <section class="content contact" aria-label="Contact" tabindex="0"><div class="eyebrow">06 / WHAT’S NEXT?</div><h2>Great things start<br>with a hello<span>.</span></h2><p>Have an idea or a development challenge? I’d love to hear about it. Let’s connect and explore what we can build together.</p><div class="contact-links"><a href="mailto:nkjouhara@gmail.com"><small>EMAIL</small><span>nkjouhara@gmail.com ↗</span></a><a href="https://www.linkedin.com/in/jouhara-n-474b5012b" target="_blank" rel="noopener noreferrer"><small>LINKEDIN</small><span>Jouhara NK ↗</span></a><a href="https://jouhara.github.io" target="_blank" rel="noopener noreferrer"><small>WEBSITE</small><span>jouhara.github.io ↗</span></a></div><button class="explore" (click)="go(0)">Back to the beginning <span>↖</span></button></section>
-  }
-  }
+    </div>
+    <div class="story-chapter" data-chapter="6">
+    <section class="content contact" aria-label="Contact" tabindex="0"><div class="eyebrow">06 / WHAT’S NEXT?</div><h2>Great things start<br>with a hello<span>.</span></h2><p>Have an idea or a development challenge? I’d love to hear about it. Let’s connect and explore what we can build together.</p><div class="contact-links"><a href="mailto:nkjouhara@gmail.com"><small>EMAIL</small><span>nkjouhara@gmail.com ↗</span></a><a href="https://www.linkedin.com/in/jouhara-n-474b5012b" target="_blank" rel="noopener noreferrer"><small>LINKEDIN</small><span>Jouhara NK ↗</span></a><a href="https://jouhara.github.io" target="_blank" rel="noopener noreferrer"><small>WEBSITE</small><span>jouhara.github.io ↗</span></a></div></section>
+    </div>
+    <div class="story-chapter" data-chapter="7">
+      <section class="content thank-you" aria-label="Thank you">
+        <div class="eyebrow">07 / UNTIL NEXT TIME</div>
+        <h2>Thank you for<br>stopping by<span>.</span></h2>
+        <p>I hope you enjoyed exploring my world.</p>
+        <button class="shutdown-button" (click)="shutdown()"><span aria-hidden="true">⏻</span> Shut down</button>
+      </section>
+    </div>
+  </div>
   <aside class="chapter-rail" aria-label="Scene navigation">@for(label of chapters; track $index){<button [class.active]="chapter() === $index" (click)="go($index)" [attr.aria-label]="label" [attr.aria-current]="chapter() === $index ? 'step' : null"><span>0{{$index+1}}</span><i></i></button>}</aside>
   <footer>
-    <button class="scroll-cue" (click)="go(chapter() === 6 ? 0 : chapter() + 1)"><span class="mouse"></span>{{ chapter() === 6 ? 'BACK TO START' : 'SCROLL TO EXPLORE' }}<span>↓</span></button>
+    <button class="scroll-cue" (click)="go(chapter() === 7 ? 0 : chapter() + 1)"><span class="mouse"></span>{{ chapter() === 7 ? 'BACK TO START' : 'SCROLL TO EXPLORE' }}<span>↓</span></button>
     <div class="journey"><span>THE JOURNEY</span><div><i [style.width.%]="progress()"></i></div><span>{{progress().toString().padStart(3,'0')}}%</span></div>
     <button class="motion" (click)="toggleMotion()" [attr.aria-pressed]="motion()">{{motion() ? '◉' : '○'}} MOTION {{motion() ? 'ON' : 'OFF'}}</button>
   </footer>
   <dialog #certificateDialog class="certificate-dialog" aria-labelledby="certificate-title" (click)="dismissCertificateBackdrop($event)">
-    <div class="work-video-heading"><div><h2 id="certificate-title">{{selectedCertificate()?.[1]}}</h2><p>{{selectedCertificate()?.[2]}}</p></div><button (click)="certificateDialog.close()" aria-label="Close certificate" autofocus>×</button></div>
+    <div class="work-video-heading"><div><h2 id="certificate-title">{{selectedCertificate()?.[1]}}</h2><p>{{selectedCertificate()?.[2]}}</p></div><button (click)="closeCertificate()" aria-label="Close certificate" autofocus>×</button></div>
     @if(selectedCertificate(); as cert){<img [src]="cert[3]" [alt]="cert[1] + ' completion certificate awarded to Jouhara NK'">}
   </dialog>
   <dialog #workVideoDialog class="work-video-dialog" aria-labelledby="work-video-title" (click)="dismissVideoBackdrop($event)" (close)="workVideo.pause()">
