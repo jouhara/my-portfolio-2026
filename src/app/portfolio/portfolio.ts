@@ -394,6 +394,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     // Resolve the maximize hit area before the screen changes size.
     let maximizePointerTime=0;
     this.spatialRenderer.domElement.addEventListener('pointerdown',event=>{
+      maximizePointerTime=0;
       if(event.button!==0||this.exploreRoom()||this.booting())return;
       const index=this.openedFolder();
       if(index===null)return;
@@ -406,7 +407,9 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
       this.zone.run(()=>this.toggleMaximize(index));
     },true);
     this.spatialRenderer.domElement.addEventListener('click',event=>{
-      if(performance.now()-maximizePointerTime<500){event.preventDefault();event.stopImmediatePropagation();}
+      if(event.detail>0&&maximizePointerTime>0&&performance.now()-maximizePointerTime<500){
+        maximizePointerTime=0;event.preventDefault();event.stopImmediatePropagation();
+      }
     },true);
     this.spatialRenderer.domElement.addEventListener('click',event=>{
       if((event.target as HTMLElement).closest('button,a'))return;
