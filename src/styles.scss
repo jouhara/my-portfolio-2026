@@ -178,3 +178,138 @@ html .experience.experience{position:relative;overflow:clip;min-height:100vh}
 .experience .scene-panel .certificate-dialog .work-video-heading h2{font-size:16px}
 .experience .scene-panel .certificate-dialog img{flex:1;min-height:0;width:100%;height:0;max-height:none;object-fit:contain}
 @media(max-width:900px){.experience .scene-panel .certificate-dialog{padding:12px}.experience .scene-panel .certificate-dialog .work-video-heading h2{font-size:14px}}
+
+.folder-mode .story,.folder-mode .chapter-rail,.folder-mode>footer{display:none!important}.folder-mode .intro-copy{display:none!important}
+.folder-mode .desktop-folders{display:grid;grid-template-columns:repeat(4,1fr);gap:20px 12px;padding:8px}
+.desktop-folder{border:1px solid transparent;border-radius:5px;background:transparent;color:white;padding:8px 4px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;font:13px/1.3 Arial,sans-serif;text-shadow:0 1px 3px #001}.desktop-folder svg{width:58px;height:48px}.desktop-folder:hover,.desktop-folder:focus-visible{background:#b2daff24;border-color:#c1e1ff66;outline:none}
+.folder-window-bar{height:38px;display:flex;justify-content:space-between;align-items:center;padding:0 14px;background:linear-gradient(#355f89,#1b3c60);color:#eaf4ff;font:13px Arial;position:absolute;top:0;left:0;right:0;z-index:2}.folder-window-bar button{background:#813e49;color:white;border:1px solid #ddaab766;border-radius:3px;font-size:22px;line-height:22px;width:32px;cursor:pointer}
+.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{position:absolute;top:38px;bottom:0;left:0;right:0;overflow-y:auto;overscroll-behavior:contain;padding:20px 24px;scrollbar-width:thin;scrollbar-color:#739bc1 #10263f}
+.folder-mode .scene-panel:has(.folder-window-bar){background:linear-gradient(#0b2038df,#0b2038df),url('../public/media/windows-desktop.png') center/100% 100% no-repeat!important}
+@media(max-width:900px){.folder-mode .desktop-folders{grid-template-columns:repeat(3,1fr);gap:8px;padding:0}.desktop-folder{font-size:11px;padding:5px 2px}.desktop-folder svg{width:44px;height:37px}.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{padding:16px}.folder-mode .scene-panel:has(.folder-window-bar) .credential-grid{grid-template-columns:1fr!important}}
+
+/* Desktop icons flow from top to bottom along the left edge. */
+.folder-mode .desktop-folders{display:grid;grid-auto-flow:column;grid-template-rows:repeat(4,76px);grid-template-columns:100px 100px;justify-content:start;gap:8px;padding:0}
+.desktop-folder{font-size:12px;gap:3px;padding:4px}.desktop-folder svg{height:40px;width:50px}
+.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{bottom:30px}
+.folder-window-bar{background:linear-gradient(#8eb6dccc,#4879abc9);border-bottom:1px solid #bdd8f577;text-shadow:0 1px 2px #13324b;box-shadow:inset 0 1px 0 #d8eeff77}.folder-window-bar span::before{content:'📁';margin-right:8px}
+.desktop-taskbar{position:absolute;bottom:0;left:0;right:0;height:30px;z-index:5;background:linear-gradient(#447da5ed,#194b77f5);border-top:1px solid #b7d8ef80;box-shadow:0 -2px 6px #03152744;color:#edf7ff;display:block}
+.desktop-start-button{position:absolute;bottom:2px;left:5px;width:32px;height:32px;border:1px solid #d4eeff80;border-radius:50%;background:radial-gradient(circle at 40% 25%,#84d3f4,#125180 70%);box-shadow:0 0 6px #021a38;padding:3px;cursor:pointer}.desktop-start-button img{width:100%;height:100%;object-fit:contain}.desktop-start-button:hover{box-shadow:0 0 12px #b9eeff}
+.taskbar-label{position:absolute;left:48px;top:7px;font:11px Arial;color:#e8f5ff}.desktop-taskbar>small{position:absolute;right:10px;top:9px;font:9px Arial;color:#c7e3fa}
+.desktop-start-menu{position:absolute;bottom:34px;left:5px;width:225px;padding:12px;background:linear-gradient(135deg,#e8f3fff5,#c5dfedf5);border:2px solid #6295b8;border-radius:7px 7px 0 0;box-shadow:0 -6px 30px #0008;display:flex;flex-direction:column;gap:5px;color:#17334d}.desktop-start-menu strong{padding:7px 9px 12px;font-size:17px}.desktop-start-menu button{padding:10px;text-align:left;background:transparent;border:1px solid transparent;border-radius:4px;font:13px Arial;color:#17334d;cursor:pointer}.desktop-start-menu button:hover{background:#6cb5df55;border-color:#5795ba}.desktop-start-menu .start-shutdown{margin-top:8px;background:#dfbc78;border:1px solid #ad884b}
+@media(max-width:900px){.folder-mode .desktop-folders{grid-template-rows:repeat(4,68px);grid-template-columns:88px 88px;gap:2px}.desktop-folder{font-size:10px}.desktop-folder svg{height:34px;width:43px}.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{bottom:30px}.desktop-start-menu{width:210px}}
+/* A clean wallpaper avoids baked-in desktop icons beneath the interactive folders. */
+.experience.folder-mode:not(.is-booting) .spatial-layer .scene-panel{
+ background:url('../public/media/windows-startup.svg') center/24% auto no-repeat,radial-gradient(ellipse at 28% 70%,#3ba5cb 0%,#247cd0 35%,#15428b 78%,#103269 100%)!important;
+}
+.experience.folder-mode .desktop-taskbar{height:7.6%;background:url('../public/media/windows-desktop.png') center bottom/100% 1316% no-repeat;border:0;box-shadow:none}
+.folder-mode .desktop-taskbar .taskbar-label,.folder-mode .desktop-taskbar>small{display:none}
+.folder-mode .desktop-start-button{left:0;bottom:0;width:7.2%;height:100%;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.folder-mode .desktop-start-button img{visibility:hidden}
+.folder-mode .desktop-start-button:hover,.folder-mode .desktop-start-button:focus-visible{background:#a5e6ff22;box-shadow:none;outline:1px solid #c5eeff;outline-offset:-2px}
+.folder-mode .desktop-start-menu{bottom:100%}
+.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{bottom:7.6%}
+.folder-mode .desktop-folders{padding:0}
+/* Keep the desktop taskbar within the screen glass. */
+.folder-mode .scene-panel{overflow:hidden!important}
+.experience.folder-mode .desktop-taskbar{left:1px;right:1px;bottom:1px;border-radius:0;overflow:visible}
+.folder-mode .desktop-start-button:focus-visible{outline:1px solid #b9e9ff;outline-offset:-3px}
+.folder-mode .desktop-start-button:hover{background:transparent;filter:brightness(1.12)}
+.folder-mode .desktop-start-menu{left:2px;bottom:calc(100% + 1px);width:155px;padding:6px;border:1px solid #8babca;border-radius:5px 5px 0 0;background:linear-gradient(#edf6fff5,#d5e4f1fa);box-shadow:inset 0 0 0 1px #fff8,0 -3px 14px #001b3866;gap:0}
+.folder-mode .desktop-start-menu .start-shutdown{margin:0;padding:8px 12px;background:linear-gradient(#f4e9cf,#dfc18d);border:1px solid #b6996c;border-radius:3px;font:12px 'Segoe UI',Arial,sans-serif;color:#26313b;text-shadow:0 1px #fff8}
+.folder-mode .desktop-start-menu .start-shutdown:hover{background:linear-gradient(#fff2d2,#eaca90);border-color:#997740}
+
+/* Warm room lighting around the interactive monitor. */
+.folder-mode .vignette{opacity:.2}.folder-mode .brand{color:#243647;text-shadow:0 1px #ffffff80}.folder-mode .menu-toggle{background:#253849cc;border-color:#84969f;color:#f1f6fa}
+
+.room-controls{position:fixed;bottom:20px;right:24px;z-index:45;display:flex;flex-direction:column;align-items:flex-end;gap:8px}.room-controls button{padding:11px 17px;background:#203744e8;color:#edf5f9;border:1px solid #8ea6b399;border-radius:24px;font:13px Arial;cursor:pointer;box-shadow:0 3px 14px #0003}.room-controls small{color:#233744;background:#e7eef0dd;padding:6px 10px;border-radius:6px;font:11px Arial}.room-exploring .spatial-layer{cursor:grab;touch-action:none}.room-exploring .spatial-layer:active{cursor:grabbing}
+@media(max-width:900px){.room-controls{bottom:18px;right:16px}.room-controls button{font-size:12px}}
+
+.wall-light-switch{position:fixed;z-index:40;transform:translate(-50%,-50%);width:36px;height:46px;padding:0;border:1px solid #8c887f;border-radius:3px;background:linear-gradient(#f7f4ed,#d8d4cb);color:#37434d;box-shadow:inset 0 1px 1px #fff,0 2px 4px #0003;cursor:pointer}.wall-light-switch span{font-size:17px}.wall-light-switch small{position:absolute;top:calc(100% + 5px);left:50%;transform:translateX(-50%);white-space:nowrap;color:#e5edf2;text-shadow:0 1px 3px #000;font:10px Arial}.wall-light-switch[aria-checked=false]{background:linear-gradient(#cbc7be,#eeebe4)}.mobile-light-toggle{display:none}@media(max-width:900px){.mobile-light-toggle{display:block}}
+
+/* The clickable area sits over the actual 3D wall plate, without a second drawn switch. */
+.wall-light-switch,.wall-light-switch[aria-checked=false]{background:transparent;border:0;border-radius:0;box-shadow:none;padding:0;color:transparent}.wall-light-switch:focus-visible{outline:2px solid #80bded;outline-offset:3px}.wall-light-switch:hover{background:#ffffff15}.wall-light-switch::after{content:'Room light';position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);font:11px Arial;white-space:nowrap;background:#243744dd;color:#edf5fa;padding:5px 8px;border-radius:4px;opacity:0;pointer-events:none}.wall-light-switch:hover::after,.wall-light-switch:focus-visible::after{opacity:1}
+.folder-clue{position:absolute;top:35px;right:24px;width:210px;pointer-events:none;z-index:2;color:#fff0be;text-align:center;font:italic 17px/1.4 Georgia,serif;text-shadow:0 1px 3px #164282}.folder-clue svg{width:160px;height:90px;display:block;margin:2px 0 0 -35px}.folder-clue path,.room-clue path{fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:240;animation:clue-draw 1.8s ease both}
+.room-clue{position:absolute;right:calc(100% + 18px);bottom:10px;width:155px;pointer-events:none;color:#243744;font:italic 15px Georgia,serif;white-space:nowrap}.room-clue svg{display:block;width:100px;height:50px;margin-left:40px}
+@keyframes clue-draw{from{stroke-dashoffset:240;opacity:0}to{stroke-dashoffset:0;opacity:1}}
+@media(max-width:900px){.folder-clue{right:10px;top:36px;width:125px;font-size:13px}.folder-clue svg{width:100px;height:65px;margin-left:-18px}.room-clue{right:0;bottom:calc(100% + 12px);font-size:13px}}
+@media(prefers-reduced-motion:reduce){.folder-clue path,.room-clue path{animation:none}}
+
+/* Loose chalk lettering and curved arrows echo the supplied reference. */
+.folder-clue{font-family:'Chalkduster','Papyrus',cursive;font-style:normal;font-size:19px;line-height:1.45;letter-spacing:2px;text-transform:uppercase;color:#fff9e8;transform:rotate(5deg);text-shadow:0 1px 2px #16428280}
+.room-clue{font-family:'Chalkduster','Papyrus',cursive;font-style:normal;font-size:15px;letter-spacing:1px;text-transform:uppercase;transform:rotate(-4deg);color:#263c4b}
+.folder-clue path,.room-clue path{stroke-width:2;stroke-dasharray:240;filter:drop-shadow(.4px .7px 0 currentColor)}
+@media(max-width:900px){.folder-clue{font-size:14px;letter-spacing:1px}.room-clue{font-size:12px}}
+
+/* Solid application windows sit within the desktop, with wallpaper around the edges. */
+.experience.folder-mode .scene-panel .folder-window-bar{top:12px;left:12px;right:12px;height:34px;border:1px solid #c5def3;border-radius:6px 6px 0 0;background:linear-gradient(#b5d5eaf5,#729bbbfa);box-shadow:0 3px 14px #123a6544;color:#18364a;text-shadow:0 1px #eff9ff;font:12px 'Segoe UI',Arial,sans-serif}
+.folder-window-controls{display:flex;gap:1px;align-self:flex-start}.folder-window-controls button{width:28px;height:23px;font-size:18px;line-height:19px}.folder-window-controls button:first-child{background:linear-gradient(#ebf5fc,#aec8dc);color:#213e53;border:1px solid #84a1b7;border-radius:0 0 3px 3px}.folder-window-controls button:last-child{background:linear-gradient(#c98684,#a74040);border-color:#95534f;color:white}
+.experience.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{top:46px;left:12px;right:12px;bottom:calc(7.6% + 12px);padding:22px 24px;background:#f8fafc!important;color:#243543;border:1px solid #aec3d3;border-top:0;border-radius:0 0 4px 4px;text-shadow:none!important;scrollbar-color:#97aabd #edf2f7}
+.experience.folder-mode .monitor-content .content,.experience.folder-mode .monitor-content .content *{text-shadow:none!important}
+.experience.folder-mode .monitor-content .content h2{font:600 25px/1.2 'Segoe UI',Arial,sans-serif!important;letter-spacing:-.6px;color:#263d4e;margin:8px 0 18px}
+.experience.folder-mode .monitor-content .content h3{font:600 15px/1.4 'Segoe UI',Arial,sans-serif!important;color:#29485e;margin:0 0 6px}
+.experience.folder-mode .monitor-content .content p{font:13px/1.7 'Segoe UI',Arial,sans-serif!important;color:#425568!important;margin:12px 0}
+.experience.folder-mode .monitor-content .content .eyebrow{font:10px/1.4 'Segoe UI',Arial,sans-serif;color:#688397!important;letter-spacing:1.2px}
+.experience.folder-mode .monitor-content .content h2 span{color:#447ba1}
+.experience.folder-mode .monitor-content .pills span{background:#e8eff5;color:#406078;border:1px solid #ccdce8;font-size:11px}
+.experience.folder-mode .monitor-content .watch-work,.experience.folder-mode .monitor-content .shutdown-button{background:linear-gradient(#eef6fc,#dae8f2);border:1px solid #94b2c8;color:#28506d;border-radius:4px;font:12px Arial;box-shadow:inset 0 1px #fff}
+.experience.folder-mode .monitor-content .technology{background:white;border:1px solid #d7e2ea;border-radius:4px;padding:10px;box-shadow:none;color:#32485b}.experience.folder-mode .monitor-content .technology strong{font:12px Arial;color:#32485b}.experience.folder-mode .monitor-content .tech-icon{background:#eff4f8}
+.experience.folder-mode .monitor-content .role-grid{grid-template-columns:1fr!important;gap:0}.experience.folder-mode .monitor-content .role-card{padding:15px 0;background:transparent;border:0;border-bottom:1px solid #dce5ed;border-radius:0;box-shadow:none}.experience.folder-mode .monitor-content .role-top{margin-bottom:6px}.experience.folder-mode .monitor-content .role-top small,.experience.folder-mode .monitor-content time{color:#6a8092;font-size:10px}.experience.folder-mode .monitor-content .role-icon{color:#507d9b;font-size:18px}.experience.folder-mode .monitor-content .role-card a{color:#316c94;font-size:12px}
+.experience.folder-mode .monitor-content .degree-card{background:#eef4f9;border:1px solid #d4e2ed;border-radius:4px;padding:14px}.experience.folder-mode .monitor-content .cert-header{margin:20px 0 12px;color:#647c90}.experience.folder-mode .monitor-content .cert-header span{font-size:10px}
+.experience.folder-mode .monitor-content .credential-grid{grid-template-columns:repeat(3,1fr)!important;gap:12px}.experience.folder-mode .monitor-content .certificate-card{display:flex;flex-direction:column;align-items:stretch;background:white;border:1px solid #d8e3eb;border-radius:4px;padding:8px;gap:8px;box-shadow:0 1px 3px #2447660b}.certificate-thumbnail{width:100%;height:85px;object-fit:contain;background:#f2f5f7}.experience.folder-mode .certificate-card strong{font:600 11px/1.4 Arial;color:#314b60}.experience.folder-mode .certificate-card span{font:10px Arial;color:#73889a}.experience.folder-mode .certificate-view{color:#35749e;font-size:10px}
+.experience.folder-mode .monitor-content .contact-links a{color:#345e7c;border-bottom-color:#dae5ee}.experience.folder-mode .monitor-content .contact-links small{color:#738c9e}.experience.folder-mode .monitor-content .credential-note{color:#577d65;font-size:11px}
+@media(max-width:900px){.experience.folder-mode .scene-panel .folder-window-bar{left:7px;right:7px;top:7px}.experience.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{top:41px;left:7px;right:7px;bottom:calc(7.6% + 7px);padding:16px}.experience.folder-mode .monitor-content .content h2{font-size:22px!important}.experience.folder-mode .monitor-content .credential-grid{grid-template-columns:1fr 1fr!important}.certificate-thumbnail{height:65px}}
+
+/* Scroll only within the bounded application window, above the taskbar. */
+.experience.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{min-height:0;height:auto;overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable;touch-action:pan-y;padding-bottom:28px}
+.experience.folder-mode .scene-panel .work-video-dialog{position:absolute;inset:12px 12px calc(7.6% + 12px);margin:0;width:auto;height:auto;max-width:none;max-height:none;border:1px solid #aec3d3;border-radius:5px;padding:12px;background:#f8fafc;color:#243543;box-shadow:0 3px 14px #123a6544;z-index:10;overflow:hidden}
+.experience.folder-mode .scene-panel .work-video-dialog[open]{display:flex;flex-direction:column}
+.experience.folder-mode .scene-panel .work-video-dialog .work-video-heading{flex-shrink:0;height:30px;margin-bottom:10px}
+.experience.folder-mode .scene-panel .work-video-dialog .work-video-heading h2{font:600 14px 'Segoe UI',Arial,sans-serif}
+.experience.folder-mode .scene-panel .work-video-dialog video{flex:1;min-height:0;height:0;width:100%;object-fit:contain;background:#111820}
+@media(max-width:900px){.experience.folder-mode .scene-panel .work-video-dialog{inset:7px 7px calc(7.6% + 7px);padding:10px}}
+
+.screen-power-action{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:24px;color:#e4f5ff}
+.power-start-clue{font:16px 'Chalkduster','Papyrus',cursive;letter-spacing:1px}
+.screen-power-button{display:flex;align-items:center;gap:12px;padding:14px 24px;border:1px solid #b9e6ff;border-radius:30px;background:linear-gradient(#398ed9,#185586);color:white;font:600 18px Arial;cursor:pointer;box-shadow:0 0 0 6px #6bc4ff18,0 0 30px #77cfff55;animation:power-glow 2s ease-in-out infinite}
+.screen-power-button svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}.screen-power-action small{font:11px Arial;color:#c0dbea}
+.screen-power-button:hover{background:#368ccb}.screen-power-button:focus-visible{outline:3px solid white;outline-offset:5px}
+@keyframes power-glow{50%{box-shadow:0 0 0 9px #6bc4ff22,0 0 40px #77cfff88}}
+.experience.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{bottom:calc(7.6% + 52px)}
+.folder-navigation{position:absolute;bottom:calc(7.6% + 12px);left:12px;right:12px;height:40px;padding:5px 10px;display:flex;align-items:center;gap:8px;background:#edf3f8;border:1px solid #aec3d3;border-radius:0 0 4px 4px;z-index:3}
+.folder-navigation button{background:linear-gradient(#fff,#dae8f2);border:1px solid #a2bccc;border-radius:4px;padding:6px 10px;color:#34566d;font:11px 'Segoe UI',Arial;cursor:pointer}.folder-navigation .next-folder{margin-left:auto}.folder-navigation button:hover{background:#d6eafa}
+@media(max-width:900px){.experience.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{bottom:calc(7.6% + 47px)}.folder-navigation{left:7px;right:7px;bottom:calc(7.6% + 7px);padding:4px}.folder-navigation button{font-size:10px;padding:6px;max-width:50%}.screen-power-button{font-size:16px;padding:12px 18px}}
+@media(prefers-reduced-motion:reduce){.screen-power-button{animation:none}}
+
+/* Explorer navigation belongs below the title bar, with a breadcrumb address. */
+.experience.folder-mode .scene-panel .folder-navigation{top:46px;bottom:auto;left:12px;right:12px;height:38px;padding:5px 8px;background:linear-gradient(#f7fbfe,#dce9f3);border:1px solid #aec3d3;border-top:0;border-radius:0;gap:5px}
+.experience.folder-mode .folder-navigation button{display:grid;place-items:center;flex:0 0 26px;width:26px;height:26px;padding:0;max-width:none;border-radius:50%;border:1px solid #648fac;background:linear-gradient(#90c6ed,#347eb1);box-shadow:inset 0 1px 2px #fff9;color:white;text-shadow:0 1px #28506d;font:18px Arial}.experience.folder-mode .folder-navigation button:disabled{background:linear-gradient(#eff4f8,#cbd9e3);border-color:#b3c2cd;color:#99aab7;text-shadow:none;cursor:default}
+.folder-address{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:white;border:1px solid #a9bdcd;box-shadow:inset 0 1px 3px #213c5a14;padding:5px 8px;color:#3b5265;font:11px 'Segoe UI',Arial}
+.experience.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{top:84px;bottom:calc(7.6% + 12px)}
+@media(max-width:900px){.experience.folder-mode .scene-panel .folder-navigation{top:41px;left:7px;right:7px}.experience.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{top:79px;bottom:calc(7.6% + 7px)}.folder-address{font-size:10px}}
+
+.folder-navigation-clue{position:absolute;left:72px;top:calc(100% + 5px);z-index:4;display:flex;align-items:center;gap:5px;pointer-events:none;color:#50728c;font:12px 'Chalkduster','Papyrus',cursive;background:#f8fafce8;border-radius:4px;padding:2px 6px}
+.folder-navigation-clue svg{width:48px;height:26px;overflow:visible;transform:rotate(20deg)}.folder-navigation-clue path{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:130;animation:clue-draw 1.8s ease both}
+.experience.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{padding-top:52px}
+@media(max-width:900px){.folder-navigation-clue{left:62px;font-size:10px}.folder-navigation-clue svg{width:35px}.experience.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{padding-top:45px}}
+
+.outside-navigation-clue{position:fixed;z-index:15;width:145px;pointer-events:none!important;color:#263e50;font:14px/1.5 'Chalkduster','Papyrus',cursive;text-shadow:0 1px #fff8;transform:rotate(-5deg)}.outside-navigation-clue svg{display:block;width:90px;height:65px;margin-left:45px}.outside-navigation-clue path{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:180;animation:clue-draw 1.8s ease both}
+.experience.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{padding-top:22px}
+@media(max-width:900px){.outside-navigation-clue{font-size:11px;width:125px}.outside-navigation-clue svg{width:65px;height:45px;margin-left:35px}.experience.folder-mode .scene-panel:has(.folder-window-bar) .monitor-content{padding-top:16px}}
+
+/* Red exploration clues pulse to draw attention to the next action. */
+.folder-clue,.room-clue,.outside-navigation-clue,.power-start-clue{color:#e32636;text-shadow:0 0 5px #ff8a8a,0 0 12px #ff595999;animation:exploration-clue-pulse 1.25s ease-in-out infinite}
+@keyframes exploration-clue-pulse{0%,100%{opacity:1;text-shadow:0 0 5px #ff8a8a,0 0 15px #ff3434cc}50%{opacity:.45;text-shadow:0 0 2px #ff8a8a}}
+@media(prefers-reduced-motion:reduce){.folder-clue,.room-clue,.outside-navigation-clue,.power-start-clue{animation:none;opacity:1}}
+
+.folder-clue{font-size:22px;font-weight:700}.room-clue{font-size:18px;font-weight:700}.outside-navigation-clue{font-size:17px;font-weight:700;width:155px}.power-start-clue{font-size:19px;font-weight:700}
+@media(max-width:900px){.folder-clue{font-size:16px}.room-clue{font-size:14px}.outside-navigation-clue{font-size:13px;width:135px}.power-start-clue{font-size:17px}}
+
+/* Workspace controls remain easy to spot against both room lighting modes. */
+.room-controls button,.shutdown-screen button{background:linear-gradient(#2777c8,#14518b);color:#fff;border:1px solid #91d2ff;font-weight:600;box-shadow:0 0 8px #279cff66;animation:workspace-control-glow 1.7s ease-in-out infinite}
+.room-controls button:hover,.shutdown-screen button:hover{background:linear-gradient(#3999ed,#1b67aa)}
+@keyframes workspace-control-glow{0%,100%{box-shadow:0 0 6px #279cff55,0 0 0 0 #58baff22}50%{box-shadow:0 0 20px #279cffbb,0 0 0 4px #58baff33}}
+@media(prefers-reduced-motion:reduce){.room-controls button,.shutdown-screen button{animation:none}}
+
+.room-controls button,.shutdown-screen button{background:#1266df;border-color:#8bc6ff;animation:workspace-button-fill 1.7s ease-in-out infinite}
+@keyframes workspace-button-fill{0%,100%{background-color:#1266df;box-shadow:0 0 6px #279cff55}50%{background-color:#3497ff;box-shadow:0 0 18px #279cff99}}
+@media(prefers-reduced-motion:reduce){.room-controls button,.shutdown-screen button{animation:none;background:#1266df!important}}
