@@ -119,6 +119,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   private renderer?:THREE.WebGLRenderer;
   private spatialRenderer?:CSS3DRenderer;
   private spatialScene=new THREE.Scene();
+  readonly maximized=signal(false);
   private spatialPanels:CSS3DObject[]=[];
   private navigationClue?:HTMLDivElement;
   private contentMonitors:THREE.Group[]=[];
@@ -389,6 +390,24 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     this.spatialRenderer=new CSS3DRenderer();
     this.spatialRenderer.domElement.className='spatial-layer';
     this.canvas.nativeElement.parentElement!.appendChild(this.spatialRenderer.domElement);
+    // Safari can miss clicks on buttons inside a perspective-transformed screen.
+    // Resolve the maximize hit area before the screen changes size.
+    let maximizePointerTime=0;
+    this.spatialRenderer.domElement.addEventListener('pointerdown',event=>{
+      if(event.button!==0||this.exploreRoom()||this.booting())return;
+      const index=this.openedFolder();
+      if(index===null)return;
+      const button=this.spatialPanels[index]?.element.querySelector<HTMLButtonElement>('.folder-maximize');
+      if(!button)return;
+      const rect=button.getBoundingClientRect();
+      if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)return;
+      event.preventDefault();event.stopPropagation();
+      maximizePointerTime=performance.now();
+      this.zone.run(()=>this.toggleMaximize(index));
+    },true);
+    this.spatialRenderer.domElement.addEventListener('click',event=>{
+      if(performance.now()-maximizePointerTime<500){event.preventDefault();event.stopImmediatePropagation();}
+    },true);
     this.spatialRenderer.domElement.addEventListener('click',event=>{
       if((event.target as HTMLElement).closest('button,a'))return;
       const panel=this.spatialPanels.find(p=>p.element.style.visibility==='visible'&&p.element.style.pointerEvents==='auto');
@@ -403,10 +422,11 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
         const toolbar=document.createElement('div');toolbar.className='folder-window-bar';
         const title=document.createElement('span');title.textContent=this.chapters[i];
         const close=document.createElement('button');close.textContent='×';close.setAttribute('aria-label','Close folder');
-        close.addEventListener('click',()=>this.zone.run(()=>this.go(0)));
+        close.addEventListener('click',()=>this.zone.run(()=>{this.maximized.set(false);this.go(0);}));
         const controls=document.createElement('div');controls.className='folder-window-controls';
         const minimize=document.createElement('button');minimize.textContent='−';minimize.setAttribute('aria-label','Minimize folder');
-        minimize.addEventListener('click',()=>this.zone.run(()=>this.go(0)));controls.append(minimize,close);
+        minimize.addEventListener('click',()=>this.zone.run(()=>{this.maximized.set(false);this.go(0);}));
+        const maximize=document.createElement('button');maximize.className='folder-maximize';maximize.textContent='□';maximize.setAttribute('aria-label','Maximize folder');maximize.title='Maximize';maximize.addEventListener('click',event=>{event.stopPropagation();this.zone.run(()=>this.toggleMaximize(i));});controls.append(minimize,maximize,close);
         toolbar.append(title,controls);screen.appendChild(toolbar);
         const navigation=document.createElement('nav');navigation.className='folder-navigation';navigation.setAttribute('aria-label','Browse portfolio folders');
         const previous=document.createElement('button');previous.textContent='←';previous.setAttribute('aria-label','Back to '+(i===1?'Desktop':this.chapters[i-1]));previous.title=i===1?'Back to Desktop':'Back to '+this.chapters[i-1];previous.addEventListener('click',()=>this.zone.run(()=>this.go(i-1)));
@@ -438,11 +458,24 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     this.navigationClue=document.createElement('div');this.navigationClue.className='outside-navigation-clue';this.navigationClue.setAttribute('aria-hidden','true');this.navigationClue.innerHTML='<span>Back or next<br>to explore</span><svg viewBox="0 0 90 65"><path d="M8 8C48 2 22 49 80 54M68 44l12 10-16 7"/></svg>';this.spatialRenderer.domElement.appendChild(this.navigationClue);
     this.resizeSpatialContent();
   }
+  toggleMaximize(index:number):void{
+    const panel=this.spatialPanels[index];
+    if(!panel||index===0)return;
+    const body=panel.element.querySelector<HTMLElement>('.monitor-content');
+    const scrollTop=body?.scrollTop??0;
+    // The clicked window owns the action, even immediately after changing folders.
+    this.openedFolder.set(index);
+    this.exploreRoom.set(false);
+    this.maximized.update(value=>!value);
+    this.spatialPanels.forEach(object=>this.projectDisplay(object));
+    if(body)body.scrollTop=scrollTop;
+  }
   private resizeSpatialContent():void{
     const mobile=window.innerWidth<=900;
     this.spatialRenderer?.setSize(window.innerWidth,window.innerHeight);
     this.spatialPanels.forEach((object,i)=>{
       const panel=object.element;
+      panel.classList.remove('folder-maximized');
       const displayPixels=Math.min(window.innerWidth*(mobile?.90:.68),window.innerHeight*.56*(mobile?1.1:1.6));
       panel.style.width=`${displayPixels}px`;
       panel.style.height=`${displayPixels/(mobile?1.1:1.6)}px`;
@@ -473,14 +506,15 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     const index=this.booting()?0:(this.openedFolder()??0);
     this.panelStage=index+.25;
     const bootApproach=this.bootStarted()?(this.motion()?THREE.MathUtils.smoothstep((performance.now()-this.bootStart)/1800,0,1):1):0;
-    const approach=this.booting()?bootApproach:1;
+    const approach=mobile?1:(this.booting()?bootApproach:1);
     const screen=this.spatialPanels[index].element;
     if(this.desktopTaskbar.nativeElement.parentElement!==screen)screen.appendChild(this.desktopTaskbar.nativeElement);
-    this.desktopTaskbar.nativeElement.style.display=this.booting()?'none':'block';
+    this.desktopTaskbar.nativeElement.style.display=this.booting()?'none':'flex';
     const pose=this.monitorPose(index),overview=this.overviewPose(index);
-    const worldWidth=mobile?2.8:5.5,scale=worldWidth/screen.offsetWidth;
-    const distance=worldWidth*(h*.5*this.camera.projectionMatrix.elements[5])/screen.offsetWidth;
-    const readPosition=pose.position.clone().add(new THREE.Vector3(0,-screen.offsetHeight*scale*.12,distance).applyQuaternion(pose.rotation));
+    const screenWidth=parseFloat(screen.style.width),screenHeight=parseFloat(screen.style.height);
+    const worldWidth=mobile?2.8:5.5,scale=worldWidth/screenWidth;
+    const distance=worldWidth*(h*.5*this.camera.projectionMatrix.elements[5])/screenWidth;
+    const readPosition=pose.position.clone().add(new THREE.Vector3(0,-screenHeight*scale*.12,distance).applyQuaternion(pose.rotation));
     const position=overview.position.clone().lerp(readPosition,approach);
     const rotation=overview.rotation.clone().slerp(pose.rotation,approach);
     this.roomBlend=THREE.MathUtils.lerp(this.roomBlend,this.exploreRoom()?1:0,1-Math.exp(-dt*7));
@@ -516,7 +550,7 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     switchButton.style.visibility=this.booting()||this.shutDown()||Math.abs(switchPoint.x)>1||Math.abs(switchPoint.y)>1?'hidden':'visible';
     this.spatialPanels.forEach((object,i)=>{
       const panel=object.element,monitor=this.contentMonitors[i],screenPose=this.monitorPose(i);
-      const panelScale=(mobile?2.8:5.5)/panel.offsetWidth;
+      const panelScale=(mobile?2.8:5.5)/parseFloat(panel.style.width);
       object.position.copy(screenPose.position);object.quaternion.copy(screenPose.rotation);object.scale.setScalar(panelScale);
       monitor.position.copy(screenPose.position);monitor.quaternion.copy(screenPose.rotation);monitor.scale.setScalar(panelScale);monitor.visible=i===index;
       panel.style.visibility=i===index?'visible':'hidden';
@@ -529,7 +563,13 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     this.spatialPanels.forEach(object=>this.projectDisplay(object));
   }
   private projectDisplay(object:CSS3DObject):void{
-    const element=object.element,width=element.offsetWidth,height=element.offsetHeight;
+    const element=object.element,isMaximized=this.maximized()&&object===this.spatialPanels[this.openedFolder()??0]&&this.openedFolder()!==null;
+    element.classList.toggle('folder-maximized',isMaximized);
+    const maximize=element.querySelector<HTMLButtonElement>('.folder-maximize');
+    if(maximize){maximize.textContent=isMaximized?'❐':'□';maximize.setAttribute('aria-label',isMaximized?'Restore folder':'Maximize folder');maximize.title=isMaximized?'Restore':'Maximize';}
+    if(isMaximized){element.style.transform='none';element.style.zIndex='30';if(this.navigationClue)this.navigationClue.style.display='none';return;}
+    element.style.zIndex='';
+    const width=element.offsetWidth,height=element.offsetHeight;
     const corners=[[-width/2,height/2],[width/2,height/2],[width/2,-height/2],[-width/2,-height/2]].map(([x,y])=>{
       const p=new THREE.Vector3(x*object.scale.x,y*object.scale.y,0).applyQuaternion(object.quaternion).add(object.position).project(this.camera);
       return [(p.x+1)*window.innerWidth/2,(1-p.y)*window.innerHeight/2];
@@ -573,9 +613,9 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
   private resize=():void=>{
     const width=window.innerWidth,height=window.innerHeight,mobile=width<=900;
     this.camera.aspect=width/height;this.camera.fov=46;
-    this.camera.zoom=mobile?THREE.MathUtils.clamp(width/height*.9,.4,1):1;
+    this.camera.zoom=1;
     this.camera.clearViewOffset();
-    this.camera.updateProjectionMatrix();this.renderer?.setSize(width,height);this.resizeSpatialContent();this.syncScroll();
+    this.camera.updateProjectionMatrix();this.renderer?.setPixelRatio(Math.min(window.devicePixelRatio,2));this.renderer?.setSize(width,height);this.resizeSpatialContent();this.syncScroll();
   };
   ngOnDestroy():void{
     clearTimeout(this.bootTimer);this.bootSound?.pause();

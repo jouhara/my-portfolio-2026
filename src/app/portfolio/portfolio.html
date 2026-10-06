@@ -6,6 +6,12 @@
       </div>
     }
     <button class="desktop-start-button" (click)="startMenuOpen.set(!startMenuOpen())" aria-label="Start" [attr.aria-expanded]="startMenuOpen()"><img src="media/windows-startup.svg" alt=""></button>
+    <div class="taskbar-apps">
+      <button (click)="go(0)" aria-label="Desktop" title="Desktop"><svg viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="16" cy="16" rx="13" ry="8" fill="none" stroke="#f5d167" stroke-width="3" transform="rotate(-30 16 16)"/><path d="M25 18H10c1 7 10 8 15 3M10 14c2-8 13-8 15 0H10z" fill="none" stroke="#55c9ef" stroke-width="4"/></svg></button>
+      <button (click)="go(1)" aria-label="Open portfolio folders" title="Portfolio folders"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 6h11l3 4h12v17H3z" fill="#dfac35"/><path d="M3 13h26l-2 15H5z" fill="#ffdc77"/><path d="M5 15h22" stroke="#fff3bd" stroke-width="2"/></svg></button>
+      <button (click)="go(1); openWorkVideo()" aria-label="Watch me at work" title="Watch me at work"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="5" width="26" height="23" rx="4" fill="#d5e7f2"/><circle cx="16" cy="16.5" r="10" fill="#ee9228"/><path d="M13 10l9 6.5-9 6.5z" fill="white"/></svg></button>
+    </div>
+    <div class="taskbar-tray" aria-hidden="true"><span>▴</span><svg viewBox="0 0 24 24"><path d="M3 9h4l5-5v16l-5-5H3z" fill="currentColor"/><path d="M15 8q5 4 0 8M18 5q8 7 0 14" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Jouhara’s<br>workspace</span></div>
     <span class="taskbar-label">{{openedFolder() === null ? 'Desktop' : chapters[openedFolder()!]}}</span>
     <small>Jouhara’s portfolio</small>
   </div>
